@@ -5,6 +5,6 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "node build.js",
-    "lint": "eslint src --fix"
+    "lint": "eslint src --ext .ts --fix"
   }
 }

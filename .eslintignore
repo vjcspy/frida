@@ -1,0 +1,2 @@
+- dist/ # ✅ Giữ nguyên, không cần lint file build
+- node_modules/

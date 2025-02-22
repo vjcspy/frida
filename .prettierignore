@@ -1,0 +1,8 @@
+# Bỏ qua thư mục build
+dist/
+node_modules/
+turbo/
+
+# Bỏ qua file JS build
+*.js
+*.js.map
