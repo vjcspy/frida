@@ -1,0 +1,3 @@
+packages:
+  - "apps/*"       # Chứa Frida Agent & Test
+  - "packages/*"   # Chứa module chung
