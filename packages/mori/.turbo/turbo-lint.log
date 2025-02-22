@@ -1,0 +1,5 @@
+
+
+> @packages/common@1.0.0 lint /home/vm/work/k/frida/frida/packages/common
+> eslint src --ext .ts --fix
+

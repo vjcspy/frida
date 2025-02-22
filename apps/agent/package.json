@@ -3,10 +3,13 @@
   "version": "1.0.0",
   "main": "dist/index.js",
   "scripts": {
-    "build": "node build.js",
+    "build": "pnpm run clean && pnpm run compile",
+    "clean": "rimraf -rf ./dist",
+    "compile": "node build.js",
     "lint": "eslint src --ext .ts --fix"
   },
   "dependencies": {
-    "@packages/common": "workspace:*"
+    "@packages/common": "workspace:*",
+    "@packages/mori": "workspace:*"
   }
 }

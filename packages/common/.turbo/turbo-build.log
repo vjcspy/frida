@@ -1,5 +1,13 @@
 
 
 > @packages/common@1.0.0 build /home/vm/work/k/frida/frida/packages/common
-> node build.js
+> pnpm run clean && pnpm run compile
+
+
+> @packages/common@1.0.0 clean /home/vm/work/k/frida/frida/packages/common
+> rimraf -rf ./dist
+
+
+> @packages/common@1.0.0 compile /home/vm/work/k/frida/frida/packages/common
+> tsc -p tsconfig.json
 

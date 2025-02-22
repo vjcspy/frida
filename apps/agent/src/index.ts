@@ -1,3 +1,4 @@
-import { dumpAllModules } from "./util/dump-all-modules";
+import { hookChangeChapter } from "@packages/mori/dist/hook/func/change-chapter";
 
-dumpAllModules();
+
+hookChangeChapter();

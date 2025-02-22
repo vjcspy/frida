@@ -1,8 +1,11 @@
 {
-  "name": "@packages/common",
+  "name": "@packages/mori",
   "version": "1.0.0",
   "main": "dist/index",
   "types": "src/index",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "pnpm run clean && pnpm run compile",
     "clean": "rimraf -rf ./dist",
@@ -11,6 +14,9 @@
     "lint": "eslint --fix --ext ts,tsx ."
   },
   "devDependencies": {
-    "tsconfig": "workspace:*"
+    "tsconfig": "workspace:*",
+    "@packages/common": "workspace:*"
+  },
+  "dependencies": {
   }
 }

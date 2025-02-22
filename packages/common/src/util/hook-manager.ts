@@ -6,7 +6,7 @@ const hooks: Array<InvocationListener> = [];
 //   (retval) => console.log("[*] target_function returned", retval)
 // );
 
-function registerHook(moduleName: string, funcName: string, onEnterCallback?: (args: NativePointer[]) => void, onLeaveCallback?: (retval: NativePointer) => void) {
+export function registerHook(moduleName: string, funcName: string, onEnterCallback?: (args: NativePointer[]) => void, onLeaveCallback?: (retval: NativePointer) => void) {
   const addr = Module.findExportByName(moduleName, funcName);
   if (!addr) {
     console.log(`[!] Function ${funcName} not found in ${moduleName}`);
@@ -16,14 +16,31 @@ function registerHook(moduleName: string, funcName: string, onEnterCallback?: (a
   const hook = Interceptor.attach(addr, {
     onEnter: function(args) {
       if (onEnterCallback) onEnterCallback(args);
-    },
-    onLeave: function(retval) {
+    }, onLeave: function(retval) {
       if (onLeaveCallback) onLeaveCallback(retval);
     },
   });
 
   hooks.push(hook);
   console.log(`[*] Hook registered: ${funcName} in ${moduleName}`);
+}
+
+export function hookAtAddress(address: any) {
+  const targetAddr = ptr(address); // Chuyển đổi địa chỉ thành NativePointer
+
+  console.log(`[*] Hooking function at address: ${targetAddr}`);
+
+  const hook = Interceptor.attach(targetAddr, {
+    onEnter: function(args) {
+      console.log(`[*] Function at ${targetAddr} called`);
+      console.log(`    Arg[0]: ${args[0]}`);
+      console.log(`    Arg[1]: ${args[1]}`);
+    }, onLeave: function(retval) {
+      console.log(`[*] Function at ${targetAddr} returned: ${retval}`);
+    },
+  });
+  hooks.push(hook);
+  return hook; // Trả về hook để có thể gỡ sau này nếu cần
 }
 
 function unhookAll() {
@@ -36,7 +53,7 @@ function unhookAll() {
 // Lắng nghe thông điệp từ Python
 recv(function(message) {
   if (message.type === "cleanup") {
-    console.log("[*] Received cleanup message, removing hooks...");
+    console.log("[*] Received cleanup message, removing hook...");
     unhookAll();
   }
 });

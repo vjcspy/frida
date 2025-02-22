@@ -1,5 +1,13 @@
 
 
 > agent@1.0.0 build /home/vm/work/k/frida/frida/apps/agent
+> pnpm run clean && pnpm run compile
+
+
+> agent@1.0.0 clean /home/vm/work/k/frida/frida/apps/agent
+> rimraf -rf ./dist
+
+
+> agent@1.0.0 compile /home/vm/work/k/frida/frida/apps/agent
 > node build.js
 

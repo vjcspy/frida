@@ -1,3 +1,3 @@
-export function log(message: string) {
-  console.log(`[LOG]: ${message}`);
+export function info(message: string) {
+  console.log(`[AGENT]: ${message}`);
 }

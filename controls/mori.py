@@ -9,6 +9,7 @@ SCRIPT_PATH = "./../apps/agent/dist/_agent.js"
 DEFAULT_CONNECT_METHOD = "ip"
 REMOTE_IP = "192.168.159.1"
 
+
 def get_device(connect_method):
     if connect_method == "usb":
         return frida.get_usb_device()
@@ -17,12 +18,15 @@ def get_device(connect_method):
     else:
         raise ValueError("Invalid connection method. Use 'usb' or 'ip'.")
 
+
 # Biến toàn cục để lưu trữ session
 session = None
 script = None
 
+
 def on_message(message, data):
     print(f"[FRIDA MESSAGE] {message}")
+
 
 def cleanup():
     """Gửi tín hiệu cleanup đến JS và detach session."""
@@ -36,10 +40,12 @@ def cleanup():
         print("[*] Detached successfully.")
     sys.exit(0)
 
+
 def signal_handler(sig, frame):
     """Xử lý tín hiệu Ctrl+C"""
     print("\n[!] Received SIGINT (Ctrl+C), cleaning up...")
     cleanup()
+
 
 # Đăng ký signal handler cho SIGINT (Ctrl+C)
 signal.signal(signal.SIGINT, signal_handler)
@@ -52,6 +58,7 @@ try:
 
     applications = device.enumerate_applications()
     target_process = False
+    target_pid = 0
 
     print(f"{'PID':<6} {'Name':<20} {'Identifier':<40}")
     print("-" * 80)
