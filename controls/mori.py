@@ -1,7 +1,8 @@
-import frida
-import sys
 import os
 import signal
+import sys
+
+import frida
 
 PACKAGE_NAME = "jp.boi.mementomori.android"
 SCRIPT_PATH = "./../apps/agent/dist/_agent.js"
@@ -18,13 +19,17 @@ def get_device(connect_method):
 
 # Biến toàn cục để lưu trữ session
 session = None
+script = None
 
 def on_message(message, data):
     print(f"[FRIDA MESSAGE] {message}")
 
 def cleanup():
-    """Hàm này sẽ chạy khi script bị dừng, đảm bảo session được detach an toàn."""
-    global session
+    """Gửi tín hiệu cleanup đến JS và detach session."""
+    global session, script
+    if script:
+        print("[*] Sending cleanup message to JS...")
+        script.post({"type": "cleanup"})
     if session:
         print("\n[*] Detaching from target process...")
         session.detach()
