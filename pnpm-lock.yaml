@@ -57,6 +57,9 @@ importers:
       '@packages/mori':
         specifier: workspace:*
         version: link:../../packages/mori
+      '@packages/reverse1999':
+        specifier: workspace:*
+        version: link:../../packages/reverse1999
 
   packages/common:
     devDependencies:
@@ -65,6 +68,15 @@ importers:
         version: link:../tsconfig
 
   packages/mori:
+    devDependencies:
+      '@packages/common':
+        specifier: workspace:*
+        version: link:../common
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
+
+  packages/reverse1999:
     devDependencies:
       '@packages/common':
         specifier: workspace:*

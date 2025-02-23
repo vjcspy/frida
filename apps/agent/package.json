@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@packages/common": "workspace:*",
-    "@packages/mori": "workspace:*"
+    "@packages/mori": "workspace:*",
+    "@packages/reverse1999": "workspace:*"
   }
 }

@@ -4,9 +4,9 @@ import sys
 
 import frida
 
-PACKAGE_NAME = "jp.boi.mementomori.android"
+PACKAGE_NAME = "com.bluepoch.m.en.reverse1999"
 SCRIPT_PATH = "./../apps/agent/dist/_agent.js"
-DEFAULT_CONNECT_METHOD = "ip"
+DEFAULT_CONNECT_METHOD = "usb"
 REMOTE_IP = "192.168.159.1"
 
 def get_device(connect_method):
@@ -29,12 +29,18 @@ def cleanup():
     """Gửi tín hiệu cleanup đến JS và detach session."""
     global session, script
     if script:
-        print("[*] Unloading script...")
-        script.post({"type": "cleanup"})
-        script.unload()
+        try:
+            print("[*] Unloading script...")
+            script.post({"type": "cleanup"})
+            script.unload()
+        except:
+            print("[!] Error: Cannot unload script.")
     if session:
-        print("[*] Detaching from target process...")
-        session.detach()
+        try:
+            print("[*] Detaching from target process...")
+            session.detach()
+        except:
+            print("[!] Error: Cannot detach from target process.")
     sys.exit(0)
 
 def signal_handler(sig, frame):
