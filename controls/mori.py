@@ -19,11 +19,13 @@ def get_device(connect_method):
 
 session = None
 script = None
+stop = False
 
 def on_message(message, data):
     print(f"[FRIDA MESSAGE] {message}")
 
 def cleanup():
+    stop = True
     """Gửi tín hiệu cleanup đến JS và detach session."""
     global session, script
     if script:
@@ -100,7 +102,7 @@ try:
     print("[*] Type 'r' + Enter to reload script, or Ctrl+C to exit.")
 
     # Vòng lặp chờ input
-    while True:
+    while not stop:
         user_input = input()
         if user_input.strip().lower() == "r":
             print("[*] Reloading script...")
