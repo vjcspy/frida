@@ -29,11 +29,11 @@ export function hookAtAddress(address: any, functionName?: string) {
   try {
     const targetAddr = ptr(address); // Chuyển đổi địa chỉ thành NativePointer
 
-    console.log(`[${functionName}] Hooking function at address: ${targetAddr}`);
+    console.log(`[Interceptor] Hooking function ${functionName} at address: ${targetAddr}`);
 
     const hook = Interceptor.attach(targetAddr, {
       onEnter: function(args) {
-        console.log(`[${functionName}] Function at ${targetAddr} to be called`);
+        console.log(`[Interceptor] Function ${functionName} at ${targetAddr} to be called`);
         // Note: args is pointer so it doesn't have any value to print
         // try {
         //   while (!args[argCount].isNull()) {
@@ -43,13 +43,13 @@ export function hookAtAddress(address: any, functionName?: string) {
         //   console.log(`[${functionName}] Detected ${argCount} arguments.`);
         // }
       }, onLeave: function(retval) {
-        console.log(`[${functionName}] Function at ${targetAddr} returned: ${retval}`);
+        console.log(`[Interceptor] Function ${functionName} at ${targetAddr} returned: ${retval}(Int: ${retval.toInt32()})`);
       },
     });
     hooks.push(hook);
     return hook; // Trả về hook để có thể gỡ sau này nếu cần
   } catch (e) {
-    console.log(`[${functionName}] Failed to hook function at address: ${address}`);
+    console.log(`[Interceptor] Failed ${functionName} to hook function at address: ${address}`);
   }
 }
 
