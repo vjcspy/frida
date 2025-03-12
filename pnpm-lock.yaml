@@ -51,36 +51,48 @@ importers:
 
   apps/agent:
     dependencies:
+      '@game/mori':
+        specifier: workspace:*
+        version: link:../../games/mori
+      '@game/reverse1999':
+        specifier: workspace:*
+        version: link:../../games/reverse1999
+      '@game/subway':
+        specifier: workspace:*
+        version: link:../../games/subway
       '@packages/common':
         specifier: workspace:*
         version: link:../../packages/common
-      '@packages/mori':
+
+  games/mori:
+    devDependencies:
+      '@packages/common':
         specifier: workspace:*
-        version: link:../../packages/mori
-      '@packages/reverse1999':
+        version: link:../../packages/common
+      tsconfig:
         specifier: workspace:*
-        version: link:../../packages/reverse1999
+        version: link:../../packages/tsconfig
+
+  games/reverse1999:
+    devDependencies:
+      '@packages/common':
+        specifier: workspace:*
+        version: link:../../packages/common
+      tsconfig:
+        specifier: workspace:*
+        version: link:../../packages/tsconfig
+
+  games/subway:
+    devDependencies:
+      '@packages/common':
+        specifier: workspace:*
+        version: link:../../packages/common
+      tsconfig:
+        specifier: workspace:*
+        version: link:../../packages/tsconfig
 
   packages/common:
     devDependencies:
-      tsconfig:
-        specifier: workspace:*
-        version: link:../tsconfig
-
-  packages/mori:
-    devDependencies:
-      '@packages/common':
-        specifier: workspace:*
-        version: link:../common
-      tsconfig:
-        specifier: workspace:*
-        version: link:../tsconfig
-
-  packages/reverse1999:
-    devDependencies:
-      '@packages/common':
-        specifier: workspace:*
-        version: link:../common
       tsconfig:
         specifier: workspace:*
         version: link:../tsconfig

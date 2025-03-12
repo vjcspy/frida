@@ -4,7 +4,7 @@ import sys
 
 import frida
 
-PACKAGE_NAME = "com.bluepoch.m.en.reverse1999"
+PACKAGE_NAME = "com.kiloo.subwaysurf"
 SCRIPT_PATH = "./../apps/agent/dist/_agent.js"
 DEFAULT_CONNECT_METHOD = "usb"
 REMOTE_IP = "192.168.159.1"
@@ -102,7 +102,8 @@ try:
         sys.exit(1)
 
     print(f"[*] Attaching to application {target_process}...")
-    session = device.attach(target_process, realm='emulated')
+    session = device.attach(target_process)
+    # session = device.attach(target_process, realm='emulated')
 
     if not os.path.exists(SCRIPT_PATH):
         print(f"[!] Error: Script file '{SCRIPT_PATH}' not found. Check the path!")

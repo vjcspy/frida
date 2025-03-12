@@ -1,5 +1,5 @@
 {
-  "name": "@packages/reverse1999",
+  "name": "@game/subway",
   "version": "1.0.0",
   "main": "dist/index",
   "types": "src/index",

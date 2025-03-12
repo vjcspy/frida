@@ -1,5 +1,5 @@
 {
-  "name": "@packages/mori",
+  "name": "@game/reverse1999",
   "version": "1.0.0",
   "main": "dist/index",
   "types": "src/index",

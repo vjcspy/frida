@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "@packages/common": "workspace:*",
-    "@packages/mori": "workspace:*",
-    "@packages/reverse1999": "workspace:*"
+    "@game/mori": "workspace:*",
+    "@game/reverse1999": "workspace:*",
+    "@game/subway": "workspace:*"
   }
 }
