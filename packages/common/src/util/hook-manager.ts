@@ -33,15 +33,15 @@ export function hookAtAddress(address: any, functionName?: string) {
 
     const hook = Interceptor.attach(targetAddr, {
       onEnter: function(args) {
-        let argCount = 0;
-        try {
-          while (!args[argCount].isNull() || argCount < 10) { // Giới hạn tối đa 10 args
-            console.log(`[${functionName}] Arg[${argCount}]: ${args[argCount]}`);
-            argCount++;
-          }
-        } catch (e) {
-          console.log(`[${functionName}] Detected ${argCount} arguments.`);
-        }
+        console.log(`[${functionName}] Function at ${targetAddr} to be called`);
+        // Note: args is pointer so it doesn't have any value to print
+        // try {
+        //   while (!args[argCount].isNull()) {
+        //     console.log(`[${functionName}] Arg[${argCount}]: ${args[argCount]}`);
+        //   }
+        // } catch (e) {
+        //   console.log(`[${functionName}] Detected ${argCount} arguments.`);
+        // }
       }, onLeave: function(retval) {
         console.log(`[${functionName}] Function at ${targetAddr} returned: ${retval}`);
       },
