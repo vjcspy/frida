@@ -4,7 +4,7 @@ import sys
 
 import frida
 
-PACKAGE_NAME = "jp.boi.mementomori.android"
+PACKAGE_NAME = "com.bluepoch.m.en.reverse1999"
 SCRIPT_PATH = "./../apps/agent/dist/_agent.js"
 DEFAULT_CONNECT_METHOD = "usb"
 REMOTE_IP = "192.168.159.1"
@@ -29,7 +29,6 @@ def on_message(message, data):
 
 
 def cleanup():
-    stop = True
     """Gửi tín hiệu cleanup đến JS và detach session."""
     global session, script
     if script:

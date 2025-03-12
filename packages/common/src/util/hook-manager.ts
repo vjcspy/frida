@@ -25,30 +25,32 @@ export function registerHook(moduleName: string, funcName: string, onEnterCallba
   console.log(`[*] Hook registered: ${funcName} in ${moduleName}`);
 }
 
-export function hookAtAddress(address: any) {
-  const targetAddr = ptr(address); // Chuyển đổi địa chỉ thành NativePointer
+export function hookAtAddress(address: any, functionName?: string) {
+  try {
+    const targetAddr = ptr(address); // Chuyển đổi địa chỉ thành NativePointer
 
-  console.log(`[*] Hooking function at address: ${targetAddr}`);
+    console.log(`[${functionName}] Hooking function at address: ${targetAddr}`);
 
-  const hook = Interceptor.attach(targetAddr, {
-    onEnter: function(args) {
-      let argCount = 0;
-      try {
-        while (!args[argCount].isNull() || argCount < 10) { // Giới hạn tối đa 10 args
-          console.log(`    Arg[${argCount}]: ${args[argCount]}`);
-          argCount++;
+    const hook = Interceptor.attach(targetAddr, {
+      onEnter: function(args) {
+        let argCount = 0;
+        try {
+          while (!args[argCount].isNull() || argCount < 10) { // Giới hạn tối đa 10 args
+            console.log(`[${functionName}] Arg[${argCount}]: ${args[argCount]}`);
+            argCount++;
+          }
+        } catch (e) {
+          console.log(`[${functionName}] Detected ${argCount} arguments.`);
         }
-      } catch (e) {
-        console.log(`[*] Detected ${argCount} arguments.`);
-      }
-      console.log(`    Arg[0]: ${args[0]}`);
-      console.log(`    Arg[1]: ${args[1]}`);
-    }, onLeave: function(retval) {
-      console.log(`[*] Function at ${targetAddr} returned: ${retval}`);
-    },
-  });
-  hooks.push(hook);
-  return hook; // Trả về hook để có thể gỡ sau này nếu cần
+      }, onLeave: function(retval) {
+        console.log(`[${functionName}] Function at ${targetAddr} returned: ${retval}`);
+      },
+    });
+    hooks.push(hook);
+    return hook; // Trả về hook để có thể gỡ sau này nếu cần
+  } catch (e) {
+    console.log(`[${functionName}] Failed to hook function at address: ${address}`);
+  }
 }
 
 function unhookAll() {

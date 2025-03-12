@@ -4,7 +4,7 @@ import sys
 
 import frida
 
-PACKAGE_NAME = "jp.boi.mementomori.android"
+PACKAGE_NAME = "com.bluepoch.m.en.reverse1999"
 SCRIPT_PATH = "./../apps/agent/dist/_agent.js"
 DEFAULT_CONNECT_METHOD = "usb"
 REMOTE_IP = "192.168.159.1"
